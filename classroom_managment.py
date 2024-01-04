@@ -52,7 +52,7 @@ def add_student(name, email=None):
           'grades':[] 
            }
      classroom.append(s)
-    pass
+
 def return_index(name):
     count=0
     for student in classroom:
@@ -65,34 +65,27 @@ def delete_student(name):
    if(return_index(name)!=-1):
             index=return_index(name)
             del classroom[index]
-    pass
-
 
 def set_email(name, email):
     index=return_index(name)
     classroom[index]['email']=email
-    pass
-
 
 def add_grade(name, profession, grade):
     index=return_index(name)
     if(index!=-1):
       t=(profession,grade)
       classroom[index]['grades'].append(t)
-    pass
 
 def avg_grade(name, profession):
      index=return_index(name)
      if(index!=-1):
           count=0
-          sumall=0
+          sum_all=0
           for  grade in classroom[index]['grades']:
             if grade[0]==profession:
                count+=1
-               sumall+=grade[1]
-          return (sumall/count)
-    pass
-
+               sum_all+=grade[1]
+          return (sum_all/count)
 
 def get_professions(name):
       index=return_index(name)
@@ -102,4 +95,4 @@ def get_professions(name):
             if(l.__contains__(i[0])==False):
                 l.append(i[0])
          return l
-    pass
+
