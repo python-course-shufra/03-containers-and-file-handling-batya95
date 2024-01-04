@@ -34,39 +34,70 @@ classroom = [
 ]
 
 
-def add_student(name, email=None):
-    """Add a new student to the classroom
-    with the following keys:
-    'name': the given name
-    'email': if email is given use it otherwise use <name>@example.com
-             in lowercase, you can use the `s.lower()` method
-    'grade': initialize with empty list
-    """
-    pass
 
+def add_student(name, email=None):
+     if(email==None):
+       namelower=name.lower()
+       email=f'{namelower}@example.com'
+       s={'name': name,
+          'email':email,
+          'grades':[]  
+      }
+     else:
+          s={   
+          'name': name,
+          'email':email,
+          'grades':[] 
+           }
+     classroom.append(s)
+    pass
+def return_index(name):
+    count=0
+    for student in classroom:
+        if(student['name']==name): 
+          return count
+        count+=1
+    return -1
 
 def delete_student(name):
-    """Delete a student from the classroom"""
+   if(return_index(name)!=-1):
+            index=return_index(name)
+            del classroom[index]
     pass
 
 
 def set_email(name, email):
-    """Sets the email of the student"""
+    index=return_index(name)
+    classroom[index]['email']=email
     pass
 
 
 def add_grade(name, profession, grade):
-    """Adds a new grade to the student grades"""
+    index=return_index(name)
+    if(index!=-1):
+      t=(profession,grade)
+      classroom[index]['grades'].append(t)
     pass
 
-
 def avg_grade(name, profession):
-    """Returns the average of grades of the student
-    in the specified profession
-    """
+     index=return_index(name)
+     if(index!=-1):
+          count=0
+          sumall=0
+          for  grade in classroom[index]['grades']:
+            if grade[0]==profession:
+               count+=1
+               sumall+=grade[1]
+          return (sumall/count)
     pass
 
 
 def get_professions(name):
-    """Returns a list of unique professions that student has grades in"""
+      index=return_index(name)
+      if(index!=-1):
+         l=[]
+         for i in classroom[index]['grades']:
+            if(l.__contains__(i[0])==False):
+                l.append(i[0])
+         return l
     pass
